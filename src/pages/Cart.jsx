@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { ShopContext } from '../context/ShopContext';
-import Title from '../components/Title';
-import CartProduct from '../components/CartProduct';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState, useContext } from "react";
+import { ShopContext } from "../context/ShopContext";
+import Title from "../components/Title";
+import CartProduct from "../components/CartProduct";
+import { toast } from "react-toastify";
+import { createRequestHandler } from "react-router-dom";
 
 const Cart = () => {
   const {
@@ -52,7 +53,6 @@ const Cart = () => {
     }
   };
 
-
   return (
     <div className="border-t pt-14 px-4 sm:px-10">
       <div className="text-2xl mb-6">
@@ -61,13 +61,18 @@ const Cart = () => {
 
       <div className="flex flex-col gap-6">
         {cartData.map((item, index) => {
-          const productData = products.find(product => product._id === item._id);
+          const productData = products.find(
+            (product) => product._id === item._id
+          );
           const productImage = Array.isArray(productData?.image)
             ? productData.image[0]
             : productData?.image;
 
           return (
-            <div key={index} className="flex items-center justify-between gap-4 border-b pb-4">
+            <div
+              key={index}
+              className="flex items-center justify-between gap-4 border-b pb-4"
+            >
               {/* Left: Image + Info */}
               <div className="flex items-center gap-5">
                 <img
@@ -76,10 +81,13 @@ const Cart = () => {
                   className="w-20 h-20 object-cover rounded-md"
                 />
                 <div>
-                  <p className="font-small text-gray-800">{productData?.name}</p>
+                  <p className="font-small text-gray-800">
+                    {productData?.name}
+                  </p>
                   <p className="text-sm text-gray-600">Size: {item.size}</p>
                   <p className="text-sm font-medium text-gray-700">
-                    Price: {currency}{productData?.price}
+                    Price: {currency}
+                    {productData?.price}
                   </p>
                 </div>
               </div>
@@ -90,7 +98,9 @@ const Cart = () => {
                 min="1"
                 className="w-16 text-center border border-gray-300 rounded-md py-1 text-sm"
                 value={item.quantity}
-                onChange={(e) => handleQuantityChange(item._id, item.size, e.target.value)}
+                onChange={(e) =>
+                  handleQuantityChange(item._id, item.size, e.target.value)
+                }
               />
 
               {/* Right: Remove */}
@@ -105,14 +115,20 @@ const Cart = () => {
         })}
 
         {/* Totals and Place Order */}
-        <div className='flex justify-end my-20'>
-          <div className='w-full sm:w-[450px]'>
+        <div className="flex justify-end my-20">
+          <div className="w-full sm:w-[450px]">
             <CartProduct />
             <button
-              onClick={()=>{navigate('/place-order')}}
+              onClick={() => {
+                if (cartData.length === 0) {
+                  toast.error("Your cart is empty");
+                  return;
+                }
+                navigate("/place-order");
+              }}
               className="w-full mt-6  bg-black hover:bg-gray-700 text-white font-medium py-2 px-4 -md transition-all"
             >
-            PROCEED TO CHECKOUT
+              PROCEED TO CHECKOUT
             </button>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';  
-import Home from './pages/NewHome';
+import NewHome from './pages/NewHome';
 import About from './pages/About';
 import Collection from './pages/Collection';
 import Contact from './pages/Contact';
@@ -14,13 +14,14 @@ import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 import { ToastContainer, toast } from 'react-toastify';
 const App = () => {
+  const backendUrl ="http://localhost:4000";
   return (
     <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
       <ToastContainer/>
       <Navbar />
       <SearchBar/>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="*" element={<NewHome />} />
         <Route path="/about" element={<About />} />
         <Route path="/collections" element={<Collection />} />
         <Route path="/contact" element={<Contact />} />
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/place-order" element={<PlaceOrder />} />
         <Route path="/orders" element={<Orders />} />
+         {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </Routes>
       <Footer />
     </div>
