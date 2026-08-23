@@ -1,40 +1,85 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';  
-import NewHome from './pages/NewHome';
-import About from './pages/About';
-import Collection from './pages/Collection';
-import Contact from './pages/Contact';
-import Product from './pages/Product';
-import Cart from './pages/Cart';
-import Login from './pages/Login';
-import PlaceOrder from './pages/PlaceOrder';
-import Orders from './pages/Orders';
-import Footer from './components/Footer';
-import SearchBar from './components/SearchBar';
-import { ToastContainer, toast } from 'react-toastify';
-const App = () => {
-  const backendUrl ="http://localhost:4000";
-  return (
-    <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
-      <ToastContainer/>
-      <Navbar />
-      <SearchBar/>
-      <Routes>
-        <Route path="*" element={<NewHome />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/collections" element={<Collection />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/product/:id" element={<Product />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/place-order" element={<PlaceOrder />} />
-        <Route path="/orders" element={<Orders />} />
-         {/* <Route path="*" element={<Navigate to="/" />} /> */}
-      </Routes>
-      <Footer />
-    </div>
-  );
-};
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 
-export default App;
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+
+import NewHome from './pages/NewHome'
+import Collection from './pages/Collection'
+import Contact from './pages/Contact'
+
+import KingKoil from './pages/collection/KingKoil'
+import Furniture from './pages/collection/Furniture'
+import Clothing from './pages/collection/Clothing'
+import Mattresses from './pages/collection/Mattresses'
+
+const App = () => {
+
+    return (
+        <div className='px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]'>
+
+            {/* Notifications */}
+            <ToastContainer />
+
+            {/* Navigation */}
+            <Navbar />
+
+            {/* Pages */}
+            <Routes>
+
+                {/* Main Pages */}
+                <Route
+                    path='/'
+                    element={<NewHome />}
+                />
+
+                <Route
+                    path='/collections'
+                    element={<Collection />}
+                />
+
+                <Route
+                    path='/contact'
+                    element={<Contact />}
+                />
+
+
+                {/* Collection Pages */}
+                <Route
+                    path='/collection/king-koil'
+                    element={<KingKoil />}
+                />
+
+                <Route
+                    path='/collection/furniture'
+                    element={<Furniture />}
+                />
+
+                <Route
+                    path='/collection/clothing'
+                    element={<Clothing />}
+                />
+
+                <Route
+                    path='/collection/mattresses'
+                    element={<Mattresses />}
+                />
+
+
+                {/* Fallback */}
+                <Route
+                    path='*'
+                    element={<NewHome />}
+                />
+
+            </Routes>
+
+            {/* Footer */}
+            <Footer />
+
+        </div>
+    )
+}
+
+export default App
