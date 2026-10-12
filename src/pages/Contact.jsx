@@ -3,10 +3,11 @@ import Title from '../components/Title'
 
 const Contact = () => {
 
-    const whatsappNumber = '97577441715'
+   const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER
+
     const whatsappLink = `https://wa.me/${whatsappNumber}`
 
-    const facebookLink = 'https://www.facebook.com/'
+    const facebookLink =import.meta.env.VITE_FACEBOOK_LINK
 
     return (
         <div className='my-10 px-4 sm:px-6 lg:px-0'>
@@ -67,7 +68,7 @@ const Contact = () => {
                     </p>
 
                     <p className='text-sm font-medium mt-4'>
-                        +975 77441715
+                        +975 17111333
                     </p>
 
                     <span className='inline-block mt-5 text-sm border-b border-black'>

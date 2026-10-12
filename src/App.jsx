@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
@@ -11,8 +12,10 @@ import Contact from './pages/Contact'
 
 import KingKoil from './pages/collection/KingKoil'
 import Furniture from './pages/collection/Furniture'
+import RubberWood from './pages/collection/RubberWood'
 import Clothing from './pages/collection/Clothing'
 import Mattresses from './pages/collection/Mattresses'
+import ProductDetail from './pages/ProductDetail'
 
 const App = () => {
 
@@ -57,6 +60,11 @@ const App = () => {
                 />
 
                 <Route
+                    path='/collection/rubber-wood'
+                    element={<RubberWood />}
+                />
+
+                <Route
                     path='/collection/clothing'
                     element={<Clothing />}
                 />
@@ -64,6 +72,13 @@ const App = () => {
                 <Route
                     path='/collection/mattresses'
                     element={<Mattresses />}
+                />
+
+
+                {/* Product Detail */}
+                <Route
+                    path='/product/:id'
+                    element={<ProductDetail />}
                 />
 
 

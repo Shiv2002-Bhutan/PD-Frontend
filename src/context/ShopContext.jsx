@@ -6,7 +6,7 @@ export const ShopContext = createContext()
 
 const ShopContextProvider = ({ children }) => {
 
-    const backendUrl = 'http://localhost:4000'
+    const backendUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000'
 
     const [products, setProducts] = useState([])
     const [search, setSearch] = useState('')

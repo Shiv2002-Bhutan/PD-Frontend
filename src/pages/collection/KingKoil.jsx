@@ -1,53 +1,29 @@
-import React from 'react'
+
+import React, { useContext } from 'react'
+import { ShopContext } from '../../context/ShopContext'
 import Title from '../../components/Title'
 import CollectionProduct from '../../components/CollectionProducts'
 
 const KingKoil = () => {
 
-    const kingKoilProducts = [
-        {
-            _id: 'kk001',
-            name: 'King Koil SmartLife',
-            image: [
-                'https://www.goodbed.com/media/_cache/thumbs/800x800/king-koil-smartlife-picture-6.jpg'
-            ]
-        },
-        {
-            _id: 'kk002',
-            name: 'King Koil Natural',
-            image: [
-                'https://mattressworldnorthwest.com/cdn/shop/files/King_Koil_Natural.jpg'
-            ]
-        },
-        {
-            _id: 'kk003',
-            name: 'King Koil Modern Luxury',
-            image: [
-                'https://jewelcitymattress.com/cdn/shop/files/Modern_Luxury.jpg'
-            ]
-        },
-        {
-            _id: 'kk004',
-            name: 'King Koil Luxury',
-            image: [
-                'https://sertamattress.lt/upload/iblock/b76/b7653c73e7269ba4250d9e52c8f79eef.jpg'
-            ]
-        },
-        {
-            _id: 'kk005',
-            name: 'King Koil Lexington',
-            image: [
-                'https://aremsaprod.vtexassets.com/arquivos/ids/901561-800-auto?aspect=true&height=auto&v=638871702558170000&width=800'
-            ]
-        },
-        {
-            _id: 'kk006',
-            name: 'King Koil Pure Home',
-            image: [
-                'https://lacolchoneria.com.gt/cdn/shop/files/col_king-koil_pure_home_firm.png?v=1741445676&width=1200'
-            ]
-        }
-    ]
+    const { products } = useContext(ShopContext)
+
+    // Get King Koil products from actual database/context data
+    const kingKoilProducts = products?.filter((product) => {
+
+        const productText = `
+            ${product.name || ''}
+            ${product.category || ''}
+            ${product.subCategory || ''}
+            ${product.brand || ''}
+        `.toLowerCase()
+
+        return (
+            productText.includes('king koil') ||
+            productText.includes('kingkoil')
+        )
+
+    })
 
     return (
         <div className='my-10 px-4 sm:px-6 lg:px-0'>
@@ -100,18 +76,28 @@ const KingKoil = () => {
 
 
             {/* Products */}
-            <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5'>
+            {kingKoilProducts?.length > 0 ? (
 
-                {kingKoilProducts.map((product) => (
+                <div className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5'>
 
-                    <CollectionProduct
-                        key={product._id}
-                        product={product}
-                    />
+                    {kingKoilProducts.map((product, index) => (
 
-                ))}
+                        <CollectionProduct
+                            key={product._id || index}
+                            product={product}
+                        />
 
-            </div>
+                    ))}
+
+                </div>
+
+            ) : (
+
+                <div className='text-center py-20 text-gray-500'>
+                    <p>No King Koil products available.</p>
+                </div>
+
+            )}
 
 
             {/* Why Buy From PD Furniture */}

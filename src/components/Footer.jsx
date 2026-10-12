@@ -5,10 +5,13 @@ const Footer = () => {
 
     const year = new Date().getFullYear()
 
-    const whatsappNumber = '97577441715'
+    const whatsappNumber = import.meta.env.VITE_CONTACT
+
     const whatsappLink = `https://wa.me/${whatsappNumber}`
 
-    const facebookLink = 'https://www.facebook.com/'
+    const facebookLink =import.meta.env.VITE_FACEBOOK_LINK
+
+
 
     return (
         <div className='mt-32'>
@@ -92,11 +95,11 @@ const Footer = () => {
                     <ul className='flex flex-col gap-3 text-sm text-gray-600'>
 
                         <li>
-                            +975 77441715
+                            +975 17111333
                         </li>
 
                         <li>
-                            pd.furniture@gmail.com
+                            pdfurniture1987@gmail.com
                         </li>
 
                     </ul>

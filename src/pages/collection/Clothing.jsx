@@ -57,7 +57,7 @@ const Clothing = () => {
 
                     {clothingProducts.map((product, index) => (
 
-                        <CollectionProduct
+                        <CollectionProducts
                             key={product._id || index}
                             product={product}
                         />
