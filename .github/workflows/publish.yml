@@ -39,6 +39,10 @@ jobs:
           push: true
           build-args: |
             VITE_API_URL=/
+            VITE_WHATSAPP_NUMBER=97517308033
+            VITE_FACEBOOK_LINK=https://www.facebook.com/share/1MBMVkfaAN/
+            VITE_CONTACT=+97517111333
+            VITE_GMAIL=pdfurniture1987@gmail.com
           tags: |
             ghcr.io/shiv2002-bhutan/pd-frontend:latest
             ghcr.io/shiv2002-bhutan/pd-frontend:sha-${{ github.sha }}
