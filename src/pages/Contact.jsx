@@ -3,7 +3,7 @@ import Title from '../components/Title'
 
 const Contact = () => {
 
-   const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER
+   const whatsappNumber = '97517111333'
 
     const whatsappLink = `https://wa.me/${whatsappNumber}`
 

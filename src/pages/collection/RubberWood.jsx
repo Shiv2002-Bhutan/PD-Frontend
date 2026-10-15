@@ -220,7 +220,7 @@ const RubberWood = () => {
                 </p>
 
                 <a
-                    href='https://wa.me/97577441715'
+                    href='https://wa.me/97517111333'
                     target='_blank'
                     rel='noreferrer'
                     className='inline-flex items-center justify-center mt-6 bg-white text-black px-6 py-3 text-sm font-medium hover:bg-gray-200 transition duration-300'

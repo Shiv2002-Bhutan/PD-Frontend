@@ -9,8 +9,7 @@ const ProductDetail = () => {
 
     const product = products?.find((p) => p._id === id)
 
-    const whatsappNumber =
-        import.meta.env.VITE_WHATSAPP_NUMBER || '97577441715'
+    const whatsappNumber ='97517111333'
 
     // Product not found / still loading
     if (!product) {
