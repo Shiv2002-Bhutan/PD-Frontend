@@ -9,7 +9,7 @@ const ProductDetail = () => {
 
     const product = products?.find((p) => p._id === id)
 
-    const whatsappNumber ='97517111333'
+    const whatsappNumber ='97517308083'
 
     // Product not found / still loading
     if (!product) {

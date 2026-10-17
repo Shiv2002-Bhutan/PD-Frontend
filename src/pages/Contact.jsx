@@ -3,7 +3,7 @@ import Title from '../components/Title'
 
 const Contact = () => {
 
-   const whatsappNumber = '97517111333'
+   const whatsappNumber = '97517308083'
 
     const whatsappLink = `https://wa.me/${whatsappNumber}`
 
@@ -68,7 +68,7 @@ const Contact = () => {
                     </p>
 
                     <p className='text-sm font-medium mt-4'>
-                        +975 17111333
+                        +975 17308083
                     </p>
 
                     <span className='inline-block mt-5 text-sm border-b border-black'>

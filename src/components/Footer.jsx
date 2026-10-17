@@ -5,7 +5,7 @@ const Footer = () => {
 
     const year = new Date().getFullYear()
 
-    const whatsappNumber = import.meta.env.VITE_CONTACT
+    const whatsappNumber = '97517308083'
 
     const whatsappLink = `https://wa.me/${whatsappNumber}`
 
@@ -95,7 +95,11 @@ const Footer = () => {
                     <ul className='flex flex-col gap-3 text-sm text-gray-600'>
 
                         <li>
-                            +975 17111333
+                            +97517308083
+                        </li>
+
+                        <li>
+                            +97517111333
                         </li>
 
                         <li>

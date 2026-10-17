@@ -2,8 +2,7 @@ import React from 'react'
 
 const CollectionProducts = ({ product }) => {
 
-    const whatsappNumber =
-        import.meta.env.VITE_WHATSAPP_NUMBER
+    const whatsappNumber ='97517308083'
 
     const backendUrl =
         import.meta.env.VITE_API_URL
