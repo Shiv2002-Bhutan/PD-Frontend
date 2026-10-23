@@ -63,12 +63,39 @@ const ProductDetail = () => {
             : product.image
     )
 
-    const imageUrl =
-        typeof rawImage === 'string' && rawImage
-            ? /^https?:\/\//i.test(rawImage)
-                ? rawImage
-                : `${backendUrl}/${rawImage.replace(/^\/+/, '')}`
-            : ''
+    // Normalize image URLs for production
+    const getImageUrl = () => {
+        if (!rawImage || typeof rawImage !== 'string') {
+            return ''
+        }
+
+        try {
+            const parsedUrl = new URL(
+                rawImage,
+                window.location.origin
+            )
+
+            // Replace local development URLs with the production origin
+            if (
+                parsedUrl.hostname === 'localhost' ||
+                parsedUrl.hostname === '127.0.0.1'
+            ) {
+                return `${window.location.origin}${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`
+            }
+
+            // Keep other absolute HTTP/HTTPS URLs unchanged
+            if (/^https?:\/\//i.test(rawImage)) {
+                return rawImage
+            }
+
+            // Handle relative paths such as uploads/image.png
+            return `${backendUrl}/${rawImage.replace(/^\/+/, '')}`
+        } catch {
+            return ''
+        }
+    }
+
+    const imageUrl = getImageUrl()
 
     return (
         <div className="my-10 px-4 sm:px-6 lg:px-0">

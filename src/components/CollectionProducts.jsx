@@ -39,17 +39,27 @@ const CollectionProducts = ({ product }) => {
             return ''
         }
 
-        // Preserve complete image URLs
-        if (/^https?:\/\//i.test(image)) {
-            return image
+        try {
+            const parsedUrl = new URL(image, window.location.origin)
+
+            // Replace local development URLs with the production website origin
+            if (
+                parsedUrl.hostname === 'localhost' ||
+                parsedUrl.hostname === '127.0.0.1'
+            ) {
+                return `${window.location.origin}${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`
+            }
+
+            // Preserve other absolute HTTP/HTTPS image URLs
+            if (/^https?:\/\//i.test(image)) {
+                return image
+            }
+
+            // Handle relative paths such as uploads/image.png
+            return `${backendUrl}/${image.replace(/^\/+/, '')}`
+        } catch {
+            return ''
         }
-
-        // Handle relative paths such as uploads/image.png
-        const normalizedPath = image.startsWith('/')
-            ? image
-            : `/${image}`
-
-        return `${backendUrl}${normalizedPath}`
     }
 
     const imageUrl = getImageUrl()
