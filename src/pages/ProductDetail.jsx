@@ -8,7 +8,8 @@ const ProductDetail = () => {
     const { id } = useParams()
     const { products } = useContext(ShopContext)
 
-    const whatsappNumber = '97517308083'
+    const whatsappNumber =
+        import.meta.env.VITE_WHATSAPP_NUMBER || '97517308083'
 
     const product = products?.find(
         (p) => String(p._id) === String(id)
@@ -37,18 +38,13 @@ const ProductDetail = () => {
         import.meta.env.VITE_API_URL || window.location.origin
     ).replace(/\/+$/, '')
 
-    // Public product link
-    const shareLink =
-        `${window.location.origin}/share/product/${product._id}`
-
-    // WhatsApp enquiry message
+    // WhatsApp enquiry message (without product link)
     const message = [
         'Hi PD Furniture! 👋',
         '',
         `I'd like to ask about the *${product.name}*:`,
         '',
         `- *Brand/Category:* ${product.brand || 'N/A'} | ${product.category || 'N/A'}`,
-        `- *Link:* ${shareLink}`,
         '',
         'Could you please let me know the price and stock availability? Thanks!'
     ].join('\n')
@@ -63,7 +59,7 @@ const ProductDetail = () => {
             : product.image
     )
 
-    // Normalize image URLs for production
+    // Normalize image URLs for local and production environments
     const getImageUrl = () => {
         if (!rawImage || typeof rawImage !== 'string') {
             return ''
@@ -72,24 +68,23 @@ const ProductDetail = () => {
         try {
             const parsedUrl = new URL(
                 rawImage,
-                window.location.origin
+                backendUrl || window.location.origin
             )
 
-            // Replace local development URLs with the production origin
+            // Replace local backend URLs with the current website origin
             if (
                 parsedUrl.hostname === 'localhost' ||
                 parsedUrl.hostname === '127.0.0.1'
             ) {
-                return `${window.location.origin}${parsedUrl.pathname}${parsedUrl.search}${parsedUrl.hash}`
+                return new URL(
+                    parsedUrl.pathname +
+                    parsedUrl.search +
+                    parsedUrl.hash,
+                    window.location.origin
+                ).href
             }
 
-            // Keep other absolute HTTP/HTTPS URLs unchanged
-            if (/^https?:\/\//i.test(rawImage)) {
-                return rawImage
-            }
-
-            // Handle relative paths such as uploads/image.png
-            return `${backendUrl}/${rawImage.replace(/^\/+/, '')}`
+            return parsedUrl.href
         } catch {
             return ''
         }
